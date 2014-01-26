@@ -1,11 +1,15 @@
 <?php
   
-  class EventsController extends ApplicationController {
-    function index() {
+  class EventsController extends ApplicationController
+  {
+    function index()
+    {
+      $this->events = Event::all();
     }
 
-    function show() {
-
+    function show()
+    {
+      $this->event = Event::find($GLOBALS['_params']['id']);
     }
   }
 

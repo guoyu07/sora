@@ -1,0 +1,7 @@
+{
+  "adapter":  "mysql",
+  "database": "sora_test",
+  "hostname": "127.0.0.1",
+  "username": "root",
+  "password": "###"
+}

@@ -8,7 +8,6 @@
   {
     private static $url_elements;
     private static $routed = false;
-    private static $rendered = false;
 
     public static function init()
     {
@@ -34,34 +33,11 @@
         $controller = new $controller_classname;
 
         $controller->$action_name();
-
-        Draw::render($load_string);
+        $controller->render($load_string);
       }
       else
       {
         Draw::load('fatal#404');
-      }
-    }
-
-    private static function render($view_string)
-    {
-      $parts = explode('#', $view_string);
-
-      if(!Draw::$rendered && count($parts) === 2)
-      {
-        $controller_name = strtolower($parts[0]);
-        $action_name = strtolower($parts[1]);
-
-        ob_start();
-        include(APP_PATH . '/views/' . $controller_name . '/' . $action_name . '.html.php');
-        define(yield, ob_get_contents());
-        ob_end_clean();
-
-        include(APP_PATH . '/views/layouts/application.html.php');
-      }
-      else
-      {
-        Draw::render('fatal#404');
       }
     }
 
@@ -72,8 +48,8 @@
 
       if(1 === count(Draw::$url_elements) && '' === trim(Draw::$url_elements[0]))
       {
-        Draw::load($root_string);
         Draw::$routed = true;
+        Draw::load($root_string);
       }
     }
 
@@ -136,8 +112,8 @@
 
         if($matched)
         {
-          Draw::load($options['to']);
           Draw::$routed = true;
+          Draw::load($options['to']);
         }
       }
     }
@@ -154,55 +130,55 @@
           switch($_SERVER['REQUEST_METHOD'])
           {
             case 'GET':
-              Draw::load($resources_string . '#' . 'index');
               Draw::$routed = true;
+              Draw::load($resources_string . '#' . 'index');
               break;
 
             case 'POST':
-              Draw::load($resources_string . '#' . 'create');
               Draw::$routed = true;
+              Draw::load($resources_string . '#' . 'create');
               break;
           }
         }
         else if(count(Draw::$url_elements) === 2 && Draw::$url_elements[1] === 'new' && $_SERVER['REQUEST_METHOD'] == 'GET')
         {
-          Draw::load($resources_string . '#' . 'new');
           Draw::$routed = true;
+          Draw::load($resources_string . '#' . 'new');
         }
         else if(count(Draw::$url_elements) === 2)
         {
           switch($_SERVER['REQUEST_METHOD'])
           {
             case 'GET':
-              Draw::load($resources_string . '#' . 'show');
               $GLOBALS['_params']['id'] = Draw::$url_elements[1];
               Draw::$routed = true;
+              Draw::load($resources_string . '#' . 'show');
               break;
             
             case 'PATCH':
             case 'PUT':
-              Draw::load($resources_string . '#' . 'update');
               $GLOBALS['_params']['id'] = Draw::$url_elements[1];
               Draw::$routed = true;
+              Draw::load($resources_string . '#' . 'update');
               break;
 
             case 'DELETE':
-              Draw::load($resources_string . '#' . 'destroy');
               $GLOBALS['_params']['id'] = Draw::$url_elements[1];
               Draw::$routed = true;
+              Draw::load($resources_string . '#' . 'destroy');
               break;
           }
         }
         else if(count(Draw::$url_elements) === 3 && Draw::$url_elements[2] === 'edit'  && $_SERVER['REQUEST_METHOD'] == 'GET')
         {
-          Draw::load($resources_string . '#' . 'edit');
           $GLOBALS['_params']['id'] = Draw::$url_elements[1];
           Draw::$routed = true;
+          Draw::load($resources_string . '#' . 'edit');
         }
         else
         {
-          Draw::load($resources_string . '#' . '404');
           Draw::$routed = true;
+          Draw::load($resources_string . '#' . '404');
         }
       }
     }
