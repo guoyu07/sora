@@ -9,7 +9,7 @@
   define(ENGINE_PATH, ROOT_PATH . '/engine');
 
   // Set up params
-  $GLOBALS['_params'] = array();
+  $_params = array();
 
   // Bootstrap the application
   require(ENGINE_PATH . '/application.php');
