@@ -1,8 +1,9 @@
 <?php
 
-  class Rows implements Iterator
+  class Relation implements Iterator
   {
     private $the_rows = array();
+    private $query = '';
 
     public function add($record)
     {

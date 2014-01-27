@@ -8,6 +8,9 @@
   define(DB_PATH,     ROOT_PATH . '/db');
   define(ENGINE_PATH, ROOT_PATH . '/engine');
 
+  // Base URL
+  define(BASE_URL, 'http://localhost/petey/sora/index.php');
+
   // Set up params
   $_params = array();
 

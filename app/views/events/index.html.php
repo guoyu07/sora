@@ -3,7 +3,9 @@
 
 <ul>
   <?php foreach($this->events as $event): ?>
-  <li><b><?= $event->name ?>:</b>
-      <p><?= $event->description ?></p>
+  <li>
+    <b><?= link_to($event->name, $event) ?>:</b>
+    <p><?= $event->description ?></p>
+  </li>
   <?php endforeach; ?>
 </ul>

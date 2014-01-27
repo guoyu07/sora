@@ -11,10 +11,15 @@
   }
 
   /***********************************************
-   *                                             *
-   * Down here, we're preparing to boot up!       *
-   *                                             *
+   * LOAD THE ENGINE                             *
+   * Down here, we're preparing to boot up!      *
    ***********************************************/
+
+  // Load core helpers
+  foreach (glob(ENGINE_PATH . "/helpers/*.php") as $filename)
+  {
+    include $filename;
+  }
 
   // Establish DB connection
   $db_conf = json_decode(file_get_contents(CONFIG_PATH . '/database.json'), true);
